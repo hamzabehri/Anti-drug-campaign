@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الألعاب والفيديوهات التوعوية</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="logos">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Flag_of_Tunisia.svg" alt="علم تونس" />
+      <img src="https://www.cripe-manouba.tn/assets/logo-cripe.png" alt="شعار CRIPE Manouba" />
+    </div>
+    <h1>الألعاب والفيديوهات التوعوية</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="inscription.html">تسجيل حساب</a>
+  </nav>
+
+  <main>
+    <!-- هنا الإحصائيات -->
+    <section id="stats">
+      <h2>حالتك الآن</h2>
+      <p>النقاط: <strong id="current-points">0</strong></p>
+      <p>المستوى: <strong id="current-level">1</strong></p>
+      <p>التصنيف: <strong id="current-rank">Bronze 🟤</strong></p>
+    </section>
+
+    <!-- قسم الألعاب -->
+<section id="games">
+  <h2>🎮 قسم الألعاب</h2>
+  <ul>
+    <li>
+     <a href=https://wordwall.net/ar/resource/11508408/%D9%84%D8%B9%D8%A8%D8%A9-%D8%B9%D9%86-%D8%A7%D9%84%D9%85%D8%AE%D8%AF%D8%B1%D8%A7%D8%AA" target="_blank">
+        <button class="button game-btn" data-points="10">لعبة التوعية الأولى (10 نقاط)</button>
+      </a>
+    </li>
+    <li>
+      <a href="https://example.com/game2" target="_blank">
+        <button class="button game-btn" data-points="15">لعبة الكلمات المتقاطعة (15 نقطة)</button>
+      </a>
+    </li>
+    <li>
+      <a href="https://example.com/game3" target="_blank">
+        <button class="button game-btn" data-points="20">لعبة صح أم خطأ (20 نقطة)</button>
+      </a>
+    </li>
+  </ul>
+</section>
+    <!-- قسم الفيديوهات -->
+    <section id="videos">
+      <h2>🎥 قسم الفيديوهات</h2>
+      <ul>
+        <li>
+         <a href="https://youtu.be/OH0prpRN2nE" target="_blank">
+        <button class="button game-btn" data-points="5">فيديو توعوي 1 (5 نقاط)</button></li>
+        </li>
+         <a href="https://youtu.be/0wlL8WXYW4Y?si=27R5cEiiPcjnn-67" target="_blank">
+        <button class="button game-btn" data-points="5">فيديو توعوي 1 (5 نقاط)</button></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 جميع الحقوق محفوظة - CRIPE Manouba</p>
+  </footer>
+
+  <script>
+    // 1. دوال حساب المستوى والتصنيف
+    function calculateLevel(points) {
+      return Math.min(Math.floor(points / 50) + 1, 200);
+    }
+
+    function getRank(level) {
+      if (points >= 200) return "Master 🔥";
+      if (points >= 161) return "Diamond 🔷";
+      if (points >= 121) return "Platinum 🔵";
+      if (points >= 81)  return "Gold 🟡";
+      if (points >= 41)  return "Silver ⚪";
+      return "Bronze 🟤";
+    }
+
+    // 2. جلب النقاط من localStorage أو البدء من 0
+    let points = parseInt(localStorage.getItem('points') || '0');
+
+    // 3. تحديث عناصر الواجهة
+    function updateStatsDisplay() {
+      const level = calculateLevel(points);
+      const rank  = getRank(level);
+
+      document.getElementById('current-points').textContent = points;
+      document.getElementById('current-level').textContent  = level;
+      document.getElementById('current-rank').textContent   = rank;
+    }
+
+    // 4. ربط الأزرار لزيادة النقاط
+    document.querySelectorAll('.game-btn, .video-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pts = parseInt(btn.getAttribute('data-points')) || 0;
+        points += pts;
+        // حفظ النقاط الجديدة
+        localStorage.setItem('points', points);
+        // عرض التحديث
+        updateStatsDisplay();
+      });
+    });
+
+    // 5. استدعاء أولي لعرض الإحصائيات عند تحميل الصفحة
+    updateStatsDisplay();
+  </script>
+
+</body>
+</html>
+
