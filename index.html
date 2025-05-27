@@ -1,69 +1,37 @@
+
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>الحملة التونسية لمكافحة المخدرات والتدخين</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>عيد أضحى مبارك</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="eid-page">
+  <div class="eid-container">
+    <h1>🎉 عيد أضحى مبارك 🎉</h1>
+    <p>تتبقى <span id="countdown"></span> ليوم العيد</p>
+    <button class="enter-btn" onclick="window.location.href='home.html'">دخول الموقع</button>
+  </div>
 
-  <header>
-    <div class="logos">
-      <img src="tunisia (1).png" alt="علم تونس" />
-      <img src="image/494349179_1286366736823237_4046621331864074328_n.jpg" alt="شعار CRIPE Manouba" />
-    </div>
-    <h1>الحملة التونسية لمكافحة المخدرات والتدخين</h1>
-    <p>بالتعاون مع المركز الجهوي للإعلامية الموجهة للطفل بمنوبة (Cripe Manouba)</p>
-  </header>
+  <script>
+    const countdownElement = document.getElementById("countdown");
+    const eidDate = new Date("2025-06-06T00:00:00").getTime(); // تاريخ تقريبي للعيد
 
-  <nav>
-    <a href="#types">أنواع المخدرات</a>
-    <a href="#effects">مضارها والوقاية</a>
-    <a href="#cripe">تعريف CRIPE Manouba</a>
-    <a href="inscription.html">تسجيل حساب</a>
-    <a href="games.html">الألعاب والفيديوهات</a>
-  </nav>
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eidDate - now;
 
-  <main>
-    <section id="types">
-      <h2><img src="https://cdn-icons-png.flaticon.com/512/1049/1049252.png" alt="أنواع المخدرات" /> ما هي أنواع المخدرات؟</h2>
-      <ul>
-        <li>الحشيش والماريجوانا</li>
-        <li>الكوكايين والهيروين</li>
-        <li>المنشطات والمهلوسات</li>
-        <li>السجائر والنرجيلة</li>
-      </ul>
-    </section>
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    <section id="effects">
-      <h2><img src="https://cdn-icons-png.flaticon.com/512/565/565547.png" alt="مضار المخدرات" /> مضار المخدرات وكيف الوقاية منها</h2>
-      <p>الإدمان يؤدي إلى:</p>
-      <ul>
-        <li>تدهور الصحة الجسدية والنفسية</li>
-        <li>العزلة الاجتماعية ومشاكل العمل</li>
-        <li>ضعف المناعة وزيادة خطر الأمراض</li>
-      </ul>
-      <p><strong>الوقاية:</strong></p>
-      <ul>
-        <li>التوعية المستمرة</li>
-        <li>المشاركة في الأنشطة الرياضية</li>
-        <li>الدعم الأسري والمجتمعي</li>
-      </ul>
-    </section>
+      countdownElement.textContent = `${days} يوم، ${hours} ساعة، ${minutes} دقيقة، ${seconds} ثانية`;
+    }
 
-    <section id="cripe">
-      <h2><img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="تعريف" /> تعريف CRIPE Manouba</h2>
-      <p>المركز الجهوي للإعلامية الموجهة للطفل بمنوبة هو مؤسسة تهدف إلى نشر الوعي الرقمي والتربوي للأطفال والشباب عبر محتوى تفاعلي وحديث.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>المركز الجهوي للإعلامية الموجهة للطفل بمنوبة - Cripe Manouba</p>
-    <p>نهج الاخوة سيدي عمر، 2010 منوبة</p>
-    <p>الهاتف: 397 600 71 216+ | البريد الإلكتروني: amisinpe@gmail.com</p>
-    <p>© 2025 جميع الحقوق محفوظة</p>
-  </footer>
-
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
 </body>
 </html>
