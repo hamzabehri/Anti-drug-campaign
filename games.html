@@ -49,6 +49,11 @@
     <button class="button game-btn" data-points="20">لعبة صح أم خطأ (20 نقطة)</button>
   </a>
 </li>
+ <li>
+  <a href="la route.html">
+    <button class="button game-btn" data-points="15">لعبة من سيعيش اكثر (15 نقطة)</button>
+  </a>
+</li>
   </ul>
 </section>
     <!-- قسم الفيديوهات -->
@@ -59,8 +64,10 @@
          <a href="https://youtu.be/OH0prpRN2nE" target="_blank">
         <button class="button game-btn" data-points="5">فيديو توعوي 1 (5 نقاط)</button></li>
         </li>
+        <li>
          <a href="https://youtu.be/0wlL8WXYW4Y?si=27R5cEiiPcjnn-67" target="_blank">
         <button class="button game-btn" data-points="5">فيديو توعوي 1 (5 نقاط)</button></li>
+        </li>
       </ul>
     </section>
   </main>
@@ -76,11 +83,26 @@
     }
 
     function getRank(level) {
-      if (points >= 200) return "Master 🔥";
-      if (points >= 161) return "Diamond 🔷";
-      if (points >= 121) return "Platinum 🔵";
-      if (points >= 81)  return "Gold 🟡";
-      if (points >= 41)  return "Silver ⚪";
+       if (points >= 1500) return "grandMaster 2 🏆";
+       if (points >= 1000) return "grandMaster 1 🏆";
+      if (points >= 700) return "Master 2 👑";
+      if (points >= 680) return "Master 1 👑";
+      if (points >= 640) return "hero 2 🔥";
+      if (points >= 600)  return "hero 1 🔥";
+      if (points >= 560)  return "Diamond 4 💎";
+      if (points >= 520)  return "Diamond 3 💎";
+      if (points >= 480)  return "Diamond 2 💎";
+      if (points >= 440)  return "Diamond 1 💎";
+      if (points >= 400)  return "Platinum 4 🔵";
+      if (points >= 360)  return "Platinum 3 🔵";
+      if (points >= 320)  return "Platinum 2 🔵";
+      if (points >= 280)  return "Platinum 1 🔵";
+      if (points >= 240)  return "golde 3 🟡";
+      if (points >= 200)  return "golde 2 🟡";
+      if (points >= 160)  return "golde 1 🟡 ";
+      if (points >= 120)  return "Silver3 ⚪";
+      if (points >= 80)  return "Silver2 ⚪";
+      if (points >= 40)  return "Silver1 ⚪";
       return "Bronze 🟤";
     }
 
