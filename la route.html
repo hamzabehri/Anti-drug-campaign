@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>لعبة عجلة الأسئلة</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .wheel-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 10px solid #4CAF50;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        #ff9999 0deg 60deg,
+        #99ccff 60deg 120deg,
+        #ffff99 120deg 180deg,
+        #ccffcc 180deg 240deg,
+        #ffcc99 240deg 300deg,
+        #d9b3ff 300deg 360deg
+      );
+      transition: transform 4s ease-out;
+    }
+
+    .top-pointer {
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 25px solid red;
+      position: absolute;
+      top: -40px;
+      left: calc(50% - 15px);
+      z-index: 10;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      margin: 0 10px;
+    }
+
+    .question-box {
+      margin-top: 30px;
+      background: #ffffff;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      width: 60%;
+      text-align: center;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      min-height: 80px;
+      direction: rtl;
+      font-size: 18px;
+    }
+
+    #answerButtons {
+      margin-top: 15px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wheel-container">
+    <div class="top-pointer"></div>
+    <div class="wheel" id="wheel"></div>
+  </div>
+
+  <button onclick="spin()" id="spinBtn">دور العجلة</button>
+
+  <div class="question-box" id="questionBox">
+    اضغط على "دور العجلة" للبدء 🎉
+  </div>
+
+  <div id="answerButtons" style="display: none;">
+    <button onclick="checkAnswer('oui')">نعم</button>
+    <button onclick="checkAnswer('non')">لا</button>
+  </div>
+
+  <div id="feedback" style="margin-top: 20px; font-weight: bold;"></div>
+
+  <script>
+    const wheel = document.getElementById('wheel');
+    const questionBox = document.getElementById('questionBox');
+    const answerButtons = document.getElementById('answerButtons');
+    const feedback = document.getElementById('feedback');
+    const spinBtn = document.getElementById('spinBtn');
+
+    const questions = [
+      { text: "هل للتدخين مضار ؟", answer: "non" },
+      { text: "هل من السهل تجنب الإدمان ؟", answer: "oui" },
+      { text: "هل يؤثر الحشيش على الدماغ؟", answer: "oui" },
+      { text: "هل المخدرات لا يؤثر على الصحة؟", answer: "non" },
+      { text: "هل قول لا للمخدرات نصيحة جيدة؟", answer: "oui" },
+      { text: "هل يمكن للصديق أن يؤثر عليك بشكل سلبي؟", answer: "oui" }
+    ];
+
+    let currentAnswer = "";
+    let spinning = false;
+
+    function spin() {
+      if (spinning) return;
+      spinning = true;
+
+      spinBtn.disabled = true;
+      answerButtons.style.display = "none";
+      feedback.innerHTML = "";
+      questionBox.innerHTML =" استعد...";
+
+      const randomRotation = Math.floor(Math.random() * 360 + 1080);
+      wheel.style.transform = `rotate(${randomRotation}deg)`;
+
+      const index = Math.floor(((randomRotation % 360) / 60)) % questions.length;
+
+      setTimeout(() => {
+        const q = questions[index];
+        questionBox.innerHTML = `<strong>السؤال :</strong><br>${q.text}`;
+        currentAnswer = q.answer;
+        answerButtons.style.display = "block";
+        spinBtn.disabled = true;
+        spinning = false;
+      }, 4000);
+    }
+
+    function checkAnswer(userAnswer) {
+      answerButtons.style.display = "none";
+
+      if (userAnswer === currentAnswer) {
+        feedback.innerHTML = `<div style="color: green; animation: blink 1s ease-in-out infinite;">✅ إجابة صحيحة!</div>`;
+      } else {
+        feedback.innerHTML = `<div style="color: red; animation: shake 0.5s ease-in-out;">❌ إجابة خاطئة!</div>`;
+      }
+
+      setTimeout(() => {
+        feedback.innerHTML = "";
+        spinBtn.disabled = false;
+        spin();
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
