@@ -27,7 +27,7 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdownElement.textContent = `${days} يوم، ${hours} ساعة، ${minutes} دقيقة، ${seconds} ثانية`;
+      countdownElement.textContent = `${days} ايام، ${hours} ساعة، ${minutes} دقيقة، ${seconds}ثوان`;
     }
 
     setInterval(updateCountdown, 1000);
