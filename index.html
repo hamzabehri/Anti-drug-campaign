@@ -10,28 +10,7 @@
 <body class="eid-page">
   <div class="eid-container">
     <h1>🎉 عيد أضحى مبارك 🎉</h1>
-    <p>تتبقى <span id="countdown"></span> ليوم العيد</p>
     <button class="enter-btn" onclick="window.location.href='home.html'">دخول الموقع</button>
   </div>
-
-  <script>
-    const countdownElement = document.getElementById("countdown");
-    const eidDate = new Date("2025-06-06T00:00:00").getTime(); // تاريخ تقريبي للعيد
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = eidDate - now;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdownElement.textContent = `${days} ايام، ${hours} ساعة، ${minutes} دقيقة، ${seconds}ثوان`;
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
 </body>
 </html>
